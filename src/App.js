@@ -20,7 +20,6 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <div className="container mt-3">
           <BrowserRouter>
             <Switch>
               <Route exact path={"/home"} component={Home} />
@@ -50,7 +49,6 @@ class App extends Component {
               <Route path="/admin" component={BoardAdmin} /> */}
             </Switch>
           </BrowserRouter>
-        </div>
       </div>
     );
   }
