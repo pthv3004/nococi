@@ -32,7 +32,7 @@ class Sidebar extends Component {
                         <a href="#">Boards</a>
                     </li>
                     <li>
-                        <a href="">Projects</a>
+                        <a href="/project">Projects</a>
                     </li>
                     <li>
                         <a href="#">Pipelines</a>

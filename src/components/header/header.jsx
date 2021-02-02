@@ -16,14 +16,16 @@ export default class Header extends Component {
     const currentUser = loginService.getCurrentUser();
     if (currentUser) {
       employeeService.getEmployeeById(currentUser.employeeId).then((response) => {
+      console.log(response.data);
         this.setState({
           currentUser: currentUser,
           name: response.data.name
         })
       })
+      console.log(currentUser);
     }
 
-  }
+  } 
 
 
   componentWillUnmount() {
