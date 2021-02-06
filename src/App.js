@@ -17,13 +17,12 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <div className="container mt-3">
-          <BrowserRouter>
-            <Switch>
-              <Route exact path={"/home"} component={Home} />
-              <Route exact path={["/", "/login"]} component={Login} />
-              <Route path={"/register"} component={Register} />
-              {/*<Route exact path="/profile" component={Profile} />
+        <BrowserRouter>
+          <Switch>
+            <Route exact path={"/home"} component={Home} />
+            <Route exact path={["/", "/login"]} component={Login} />
+            <Route path={"/register"} component={Register} />
+            {/*<Route exact path="/profile" component={Profile} />
               <Route path="/user" component={UserManagement} />
               <Route path="/admin" component={AdminBoard} />
               <Route path="/faq" component={FAQManagement} />
@@ -42,9 +41,8 @@ class App extends Component {
               <Route path="/user-order" component={UserOrder} />
               <Route path="/mod" component={BoardModerator} />
               <Route path="/admin" component={BoardAdmin} /> */}
-            </Switch>
-          </BrowserRouter>
-        </div>
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }

@@ -42,7 +42,7 @@ export default class Header extends Component {
   render() {
     const { currentUser, name } = this.state
     return (
-      <div>
+      <div className="container">
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <span className="navbar-brand">Nococid</span>
           {/* <div className="navbar-nav mr-auto">

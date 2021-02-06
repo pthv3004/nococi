@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import loginService from '../../service/author_serivce/loginService'
 import Form from 'react-validation/build/form'
 import Sidebar from './sidebar/sidebar'
-import './sidebar/sidebarHome'
+import './sidebar/sidebarHome';
+import employeeService from '../../service/employee_service/employeeService';
 
 export default class Home extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            user: {}
+            user: {},
+            employee: {}
         }
 
         this.handleEvent = this.handleEvent.bind(this)
@@ -18,9 +20,13 @@ export default class Home extends Component {
     componentDidMount() {
         const user = loginService.getCurrentUser();
         if (user) {
-            this.setState({
-                user: user
+            employeeService.getEmployeeById(user.employeeId).then((res)=>{
+                this.setState({
+                    employee: res.data,
+                    user: user
+                })
             })
+            
         } else {
             this.props.history.push('/');
             window.location.reload();
@@ -46,20 +52,23 @@ export default class Home extends Component {
             localStorage.removeItem('user');
             this.props.history.push('/');
             window.location.reload();
+        },(error)=>{
+            console.log(error.response.statusText);
+            alert(error.response.statusText)
         });
     }
 
     render() {
-        const username = this.state.user.jwtToken
+        const username = this.state.employee.name
         return (
-            <div className="container-fluid">
-                <div class="wrapper">
+            <div>
+                <div className="wrapper">
                     <Sidebar />
                     <div id="content">
-                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                            <div class="container-fluid">
-                                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                                    <i class="fas fa-align-left"></i>
+                        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                            <div className="container-fluid">
+                                <button type="button" id="sidebarCollapse" className="btn btn-info">
+                                    <i className="fas fa-align-left"></i>
                                     <span>Menu</span>
                                 </button>
 

@@ -121,7 +121,7 @@ export default class Register extends Component {
                     this.props.history.push("/login");
                 },
                 (error) => {
-                    const responseMessage = error.response.data.message;
+                    const responseMessage = error.response.data;
 
                     this.setState({
                         loading: false,
