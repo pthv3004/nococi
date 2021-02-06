@@ -6,6 +6,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/home/home";
 import Header from "./components/header/header";
 import Register from "./components/register/register";
+import Project from "./components/project/project";
+import CreateProject from "./components/project/createProject";
+
 
 class App extends Component {
   constructor(props) {
@@ -17,12 +20,15 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <BrowserRouter>
-          <Switch>
-            <Route exact path={"/home"} component={Home} />
-            <Route exact path={["/", "/login"]} component={Login} />
-            <Route path={"/register"} component={Register} />
-            {/*<Route exact path="/profile" component={Profile} />
+          <BrowserRouter>
+            <Switch>
+              <Route exact path={"/home"} component={Home} />
+              <Route exact path={["/", "/login"]} component={Login} />
+              <Route path={"/register"} component={Register} />
+              <Route path={"/project"} component={Project} />
+              <Route path={"/create-project"} component={CreateProject} />
+
+              {/*<Route exact path="/profile" component={Profile} />
               <Route path="/user" component={UserManagement} />
               <Route path="/admin" component={AdminBoard} />
               <Route path="/faq" component={FAQManagement} />
@@ -43,6 +49,7 @@ class App extends Component {
               <Route path="/admin" component={BoardAdmin} /> */}
           </Switch>
         </BrowserRouter>
+
       </div>
     );
   }

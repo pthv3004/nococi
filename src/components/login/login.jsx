@@ -2,7 +2,8 @@
 import React, { Component } from 'react'
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
-import loginService from '../../service/author_serivce/loginService'
+import loginService from '../../service/author_serivce/loginService';
+import thirdPartiesService from '../../service/third_parties_service/thirdPartiesService';
 
 export default class Login extends Component {
     constructor(props) {
@@ -11,14 +12,27 @@ export default class Login extends Component {
         this.state = {
             gitHubUri: String,
             email: String,
-            password: String
+            password: String,
         }
 
         this.handleEvent = this.handleEvent.bind(this)
     }
 
     componentDidMount() {
-       
+        const uri = thirdPartiesService.loginWithGitHubURI();
+        if(uri){
+            this.setState({
+                gitHubUri : uri
+            })
+        }
+        let search = window.location.search;
+        let params = new URLSearchParams(search);
+        let foo = params.get('JwtToken');
+        if(foo){
+            this.props.history.push('/home');
+            window.location.reload();
+        }
+        console.log(foo);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) { if (prevState.name !== this.state.name) { this.handler() } }
@@ -50,16 +64,16 @@ export default class Login extends Component {
         event.preventDefault();
      
         let loginRequest = {
-            email: this.state.email,
-            password: this.state.password
+            Username: this.state.email,
+            Password: this.state.password
         }
         loginService.login(loginRequest).then(() => {
             this.props.history.push('/home');
             window.location.reload();
         })
     }
-    render() {
-        const url = this.state.gitHubUri;
+        render() {
+            const url = this.state.gitHubUri;
         return (
             <div className="container">
                 <div className="card">
@@ -72,7 +86,7 @@ export default class Login extends Component {
                         <hr />
                         <Form onSubmit={this.login}>
                             <div className="form-group">
-                                <Input name="email" className="form-control" placeholder="Email or login" type="email" onChange={this.onChangeEmail} value={this.state.email} />
+                                <Input name="email" className="form-control" placeholder="Email or login" type="text" onChange={this.onChangeEmail} value={this.state.email} />
                             </div>
                             <div className="form-group">
                                 <Input className="form-control" placeholder="******" type="password" onChange={this.onChangePassword} value={this.state.password} />

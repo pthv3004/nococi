@@ -3,7 +3,7 @@ import { NOCOCID_API } from "../../constant/api_link_constant";
 import authHeader from "./authService";
 // eslint-disable-next-line no-unused-vars
 
-const NOCID_API_ACCOUNT = NOCOCID_API + "Account";
+const NOCID_API_ACCOUNT = NOCOCID_API + "Accounts";
 class LoginSerivce {
   async login(loginRequest) {
     const response = await axios.post(

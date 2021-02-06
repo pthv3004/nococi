@@ -5,16 +5,22 @@ import Sidebar from './sidebar/sidebar'
 import './sidebar/sidebarHome';
 import employeeService from '../../service/employee_service/employeeService';
 
+import './sidebar/sidebarHome'
+import ThirdPartiesService from '../../service/third_parties_service/thirdPartiesService'
+
+
 export default class Home extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             user: {},
-            employee: {}
+            employee: {},
+            gitHubLoginURI: "",
+            successMessage: "",
+
         }
 
-        this.handleEvent = this.handleEvent.bind(this)
     }
 
     componentDidMount() {
@@ -31,21 +37,30 @@ export default class Home extends Component {
             this.props.history.push('/');
             window.location.reload();
         }
+        const uri = ThirdPartiesService.getGitHubLoginURI();
+        this.setState({
+            gitHubLoginURI: uri
+        })
+        let search = window.location.search;
+        let params = new URLSearchParams(search);
+        let message = params.get('JwtToken');
+        if (message) {
+            this.setState({
+                successMessage: "You have already connected with Github"
+            })
+        }
 
 
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) { if (prevState.name !== this.state.name) { this.handler() } }
 
     componentWillUnmount() {
 
     }
 
     // Prototype methods, Bind in Constructor (ES2015)
-    handleEvent() { }
 
     // Class Properties (Stage 3 Proposal)
-    handler = () => { this.setState() }
     logout = (event) => {
         event.preventDefault();
         loginService.logout().then(() => {
@@ -75,6 +90,12 @@ export default class Home extends Component {
                             </div>
                         </nav>
                         <h1> Hello {username}</h1>
+                        <hr />
+                        {this.state.successMessage.length > 0 ? (
+                            <h1>{this.state.successMessage}</h1>
+                        ) : (
+                                <a href={this.state.gitHubLoginURI}>Connect with Github</a>
+                            )}
                         <Form onSubmit={this.logout}>
                             <button type="submit">Logout</button>
                         </Form>
