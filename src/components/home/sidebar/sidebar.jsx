@@ -9,7 +9,7 @@ class Sidebar extends Component {
         return (
             <nav id="sidebar">
                 <div className="sidebar-header">
-                    <h3>NocoCI</h3>
+                    <h3>NocoCID</h3>
                 </div>
 
                 <ul class="list-unstyled components">
