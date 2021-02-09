@@ -31,12 +31,17 @@ export default class Header extends Component {
   }
 
 
-  logout = () => {
+  logout = (event) => {
+    event.preventDefault();
     loginService.logout().then(() => {
-      window.location.reload();
-      localStorage.removeItem('user');
+        localStorage.removeItem('user');
+        window.location.href = "http://localhost:3000/"
+        window.location.replace(window.location.href)
+    }, (error) => {
+        console.log(error.response.statusText);
+        alert(error.response.statusText)
     });
-  }
+}
 
   render() {
     const { currentUser, name } = this.state
@@ -51,7 +56,7 @@ export default class Header extends Component {
           {currentUser ? (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
-                <p>{name}</p>
+                <a href='#' className="nav-link">{name}</a>
               </li>
               <li className="nav-item">
                 <a href="#" className="nav-link" onClick={this.logout}>

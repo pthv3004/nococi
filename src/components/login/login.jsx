@@ -75,7 +75,7 @@ export default class Login extends Component {
         render() {
             const url = this.state.gitHubUri;
         return (
-            <div className="container">
+            <div className="container col-md-3">
                 <div className="card">
                     <article className="card-body">
                         <a href="/register" className="float-right btn btn-outline-primary">Sign up</a>

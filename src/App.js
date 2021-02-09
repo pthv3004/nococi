@@ -12,6 +12,8 @@ import Sidebar from "./components/home/sidebar/sidebar";
 import loginService from "./service/author_serivce/loginService";
 import employeeService from "./service/employee_service/employeeService";
 import $ from "jquery";
+import Repository from "./components/repository/repository";
+import ProjectDetail from './components/project/projectDetail';
 
 class App extends Component {
   constructor(props) {
@@ -45,15 +47,14 @@ class App extends Component {
           <div className="wrapper">
             <Sidebar />
             <div id="content">
-              <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <div className="container-fluid">
+              <nav className="navbar-light bg-light float-left">
+                <div>
                   <button
                     type="button"
                     id="sidebarCollapse"
-                    className="btn btn-info"
+                    className="btn btn-info rounded-circle"
                     onClick={this.toggleSideBar}
                   >
-                    <i className="fas fa-align-left"></i>
                     <span>Menu</span>
                   </button>
                 </div>
@@ -65,8 +66,10 @@ class App extends Component {
                   <Route path={"/register"} component={Register} />
                   <Route path={"/project"} component={Project} />
                   <Route path={"/create-project"} component={CreateProject} />
-                  {/*<Route exact path="/profile" component={Profile} />
-              <Route path="/user" component={UserManagement} />
+                  <Route exact path="/repository/:thirdPartyId" component={Repository} />
+                  <Route exact path="/project-detail/:projectId" component={ProjectDetail} />
+                  {/*
+            
               <Route path="/admin" component={AdminBoard} />
               <Route path="/faq" component={FAQManagement} />
               <Route path="/addNewFAQ" component={AddNewFAQ} />

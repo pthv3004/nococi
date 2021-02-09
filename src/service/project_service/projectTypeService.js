@@ -10,4 +10,4 @@ class ProjectTypeService {
     }
 }
 
-export default new ProjectTypeService;
+export default new ProjectTypeService();
